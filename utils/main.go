@@ -1,12 +1,16 @@
 package utils
 
 import (
+	"bytes"
+	"encoding/json"
 	"log"
+	"net/http"
 	"path/filepath"
 	"reflect"
 	"runtime"
 	"testing"
 
+	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
 
@@ -57,4 +61,26 @@ func CheckDbTestError(t *testing.T, result *gorm.DB) bool {
         return true;
     }
     return false;
+}
+
+func GenPayload(data any)*bytes.Buffer {
+	jsonData, err := json.Marshal(data)
+	CheckError(err)
+	return bytes.NewBuffer(jsonData)
+}
+
+func BindJsonReq(c *gin.Context, request interface{}) error {
+    if err := c.ShouldBindJSON(request); err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        c.Abort()
+        return err
+    }
+    return nil
+}
+
+func ReverseStr(str string)(result string){
+    for _,v := range str {
+        result = string(v) + result
+      }
+    return result
 }

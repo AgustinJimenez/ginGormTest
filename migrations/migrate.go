@@ -6,7 +6,7 @@ import (
 	"go_practice/models"
 )
 
-var modelList = []interface{}{&models.Post{}}
+var modelList = []interface{}{&models.Post{}, &models.User{}}
 
 func main(){
 	initializers.LoadEnvVariables()

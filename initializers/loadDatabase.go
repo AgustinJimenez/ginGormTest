@@ -21,7 +21,7 @@ func ConnectToDb() {
 		os.Getenv("DB_PORT"),
 	)
 	connDbUrl := fmt.Sprintf("%s dbname=%s", conn_url, dbName)
-	
+
     DB, err = gorm.Open(postgres.Open(conn_url), &gorm.Config{})
 	utils.CheckError(err)
     count  := 0

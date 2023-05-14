@@ -61,7 +61,6 @@ type updatePostRequest struct {
 }
 
 
-
 func PostsUpdate(c *gin.Context) {
 	id := c.Param("id")
 	var body updatePostRequest
