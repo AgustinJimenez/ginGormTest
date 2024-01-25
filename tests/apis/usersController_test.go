@@ -76,8 +76,10 @@ func TestLoginUser(t *testing.T){
 	}
 
 	for _, userPayload := range testCases {
+		println("\n\n TESTING EMAILS!!! EMAIL=", userPayload.get("email"), ", PASSWORD=", userPayload["password"])
 		if userPayload["email"] != nil && userPayload["password"] != nil {
 			res := tests.TestHttpRequest("POST", "/login", utils.GenPayload(userPayload))
+			println("\n\n FIRST =>  EMAIL=", userPayload["email"], ", PASSWORD=", userPayload["password"])
 			assert.Equal(t, http.StatusOK, res.Code)
 			var response controllers.LoginResponse
 			err := json.Unmarshal(res.Body.Bytes(), &response)

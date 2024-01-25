@@ -69,7 +69,8 @@ func LoginUser(context *gin.Context) {
         return 
     }
 
-	record := user.First(&user,  "email = ?", request.Email)
+
+	record := initializers.DB.First(&user,  "email = ?", request.Email)
 
 	if record.Error != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{"error": record.Error.Error()})

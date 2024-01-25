@@ -27,12 +27,15 @@ CompileDaemon --build="go build main.go" --command=./main
 ```shell
 docker build -t app .
 
+docker run -p 8000:8000 app
 docker run app
 
-docker compose up -d
+docker compose up
 
 
-docker build -t docker-gs-ping . && docker run -d -t  docker-gs-ping
+docker build -t app . && docker run -d -t app
+
+docker system prune -a -f && docker compose up
 ```
 
 ### TEST

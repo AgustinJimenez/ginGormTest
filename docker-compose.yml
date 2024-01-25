@@ -1,0 +1,32 @@
+version: "3.8"
+services:
+  app:
+    container_name: golang_app
+    build:
+      dockerfile: Dockerfile
+      context: ./
+    depends_on:
+      - db
+    networks:
+      - app_network
+  db:
+    image: postgres:latest
+    container_name: db_container
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    networks:
+      - app_network
+volumes:
+  api:
+  dbdata:
+# Networks to be created to facilitate communication between containers
+networks:
+  app_network:
+    driver: bridge

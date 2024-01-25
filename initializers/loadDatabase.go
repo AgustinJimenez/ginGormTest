@@ -2,6 +2,8 @@ package initializers
 
 import (
 	"fmt"
+
+	"go_practice/migrations"
 	"go_practice/utils"
 	"os"
 
@@ -21,7 +23,7 @@ func ConnectToDb() {
 		os.Getenv("DB_PORT"),
 	)
 	connDbUrl := fmt.Sprintf("%s dbname=%s", conn_url, dbName)
-
+	println("DB URL ===> "+conn_url)
     DB, err = gorm.Open(postgres.Open(conn_url), &gorm.Config{})
 	utils.CheckError(err)
     count  := 0
@@ -38,4 +40,9 @@ func ConnectToDb() {
 
 	DB, err = gorm.Open(postgres.Open(connDbUrl), &gorm.Config{})
 	utils.CheckError(err)
+
+
+	DB.AutoMigrate(
+		migrations.MigrationModelList...
+	)
 }

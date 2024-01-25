@@ -7,4 +7,5 @@ import (
 func main() {
   app := setup.GetApp()
   app.Run()
+  println("RUNNING!!!")
 }

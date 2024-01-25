@@ -74,8 +74,8 @@ func generateAnyUser() repositories.CreateUserDataType {
 func CreateUsersSeeds(){
 	numberOfUsers := 100
     for range make([]struct{}, numberOfUsers) {
-		_, result = repositories.CreateUser(generateAnyUser())
-		if result.Error() != nil { 
+		_, result := repositories.CreateUser(generateAnyUser())
+		if result.Error != nil { 
 			
 		}
     }

@@ -1,6 +1,7 @@
 package repositories
 
 import (
+	"go_practice/initializers"
 	"go_practice/models"
 	"go_practice/utils"
 
@@ -21,7 +22,7 @@ func CreateUser(data CreateUserDataType)(models.User, *gorm.DB){
 	user.Email = data.Email
 	err := user.HashPassword(data.Password)
 	utils.CheckError(err)
-	result := user.Create()
+	result := initializers.DB.Create(&user)
 	utils.CheckError(result.Error)
 	return user, result
 }
